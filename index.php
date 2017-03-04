@@ -29,6 +29,7 @@
       $sql = "SELECT username, comment, time FROM pratsep_shoutbox order by time desc";
       $result = mysqli_query($conn, $sql);
       $pages = ceil(mysqli_num_rows($result))/10;
+      //tere
       if ($pages > 1) {
         echo '<div class="pages">';
         for ($i=1; $i < $pages + 1; $i++) {
