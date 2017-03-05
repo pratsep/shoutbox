@@ -14,5 +14,7 @@ textarea {
   height: 150px;
 }
 #submit_button {
+	width: 200px;
+	height: 75px;
   background-color: red;
 }

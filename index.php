@@ -20,7 +20,7 @@
 		}
 	?>
     <div>
-		<form method="post" action="send_data.php" id="insert_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+		<form method="post" action="send_data.php" id="insert_form">
 			<input type="text" name="user" placeholder="Sisesta kasutaja" required/><br/>
 		</form>
     <textarea name="comment" form="insert_form" placeholder="Sisesta tekst" required></textarea><br/>
