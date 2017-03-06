@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <link rel="stylesheet" type="text/css" href="styles2.css">
+    <script src="jubinad.js"></script>
     <title>MEGA SHOUTBOX</title>
     <!--<meta http-equiv="refresh" content="5">-->
   </head>
@@ -12,7 +13,6 @@
 		$username = "test";
 		$password = "t3st3r123";
 		$dbname = "test";
-
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		// Check connection
 		if ($conn->connect_error) {
@@ -20,11 +20,11 @@
 		}
 	?>
     <div>
-		<form method="post" action="send_data.php" id="insert_form">
-			<input type="text" name="user" placeholder="Sisesta kasutaja" required/><br/>
+		<form method="post" action="send_data.php" id="insert_form" onsubmit="return checkForm(this);">
+			<input type="text" name="user" placeholder="Sisesta kasutaja" required/>
+      <textarea name="comment" form="insert_form" placeholder="Sisesta tekst" required></textarea>
+      <input id="submit_button" type="submit" value="Postita"/>
 		</form>
-    <textarea name="comment" form="insert_form" placeholder="Sisesta tekst" required></textarea><br/>
-    <button id="submit_button" type="submit" form="insert_form">Sisesta</button>
     <?php
       $sql = "SELECT username, comment, time FROM pratsep_shoutbox order by time desc";
       $result = mysqli_query($conn, $sql);
@@ -38,7 +38,6 @@
         }
         echo '</div>';
       }
-
     ?>
    </div>
     <div class="comments">
@@ -49,7 +48,6 @@
     else{
       $ofset = 0;
     }
-
 		$sql = "SELECT username, comment, time FROM pratsep_shoutbox order by time desc LIMIT 10 OFFSET $ofset";
 		$result = mysqli_query($conn, $sql);
 		if (mysqli_num_rows($result) > 0) {

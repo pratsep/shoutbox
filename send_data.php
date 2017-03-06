@@ -7,14 +7,12 @@
 	if ($conn->connect_error) {
 		die("Ei saanud ühendada: ".$conn->connect_error);
 	}
-
 	function test_input($data) {
 	  $data = trim($data);
 	  $data = stripslashes($data);
 	  $data = htmlspecialchars($data);
 	  return $data;
 	}
-
 	if(isset($_POST['user']) && isset($_POST['comment']) ){
 		$username = test_input($_POST['user']);
 		$comment = test_input($_POST['comment']);
