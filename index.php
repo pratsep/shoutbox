@@ -26,31 +26,55 @@
       <input id="submit_button" type="submit" value="Postita"/>
 		</form>
    </div>
+   <div class="pages">
+   <?php
+     $sql = "SELECT username, comment, time FROM pratsep_shoutbox order by time desc";
+     $result = mysqli_query($conn, $sql);
+     $pages = ceil(mysqli_num_rows($result))/10;
+     if (!isset($_GET['page'])) {
+       $currentpage=1;
+     }
+     else {
+       $currentpage=$_GET['page'];
+     }
+     //previous
+     if ($pages>1 && isset($_GET['page']) && $currentpage>1) {
+       $pagenr1 = $_GET['page'] - 1;
+       $addr1 = "window.location.href='?page=$pagenr1'";
+       echo '<button class="pnBtn" id="prBtn" onclick="'.$addr1.'">Previous page</button>';
+     }
+     //next
+     if ($pages>1 && $currentpage<$pages) {
+       $pagenr2 = $currentpage + 1;
+       $addr2 = "window.location.href='?page=$pagenr2'";
+       echo '<button class="pnBtn" id="ntBtn" onclick="'.$addr2.'">Next page</button>';
+     }
+     //page buttons
+     if ($pages > 1) {
+       if ($currentpage-4<1) {
+         $underpage = abs($currentpage-5);
+       }
+       else {
+         $underpage = 0;
+       }
+       if ($currentpage+4>$pages) {
+         $overpage = $currentpage+4-$pages;
+       }
+       else {
+         $overpage = 0;
+       }
+       for ($i=$currentpage-4+$underpage; $i < $currentpage+5-$overpage; $i++) {
+         $addr = "window.location.href='?page=$i'";
+         echo '<button class="nrBtn" id="pg'.$i.'" onclick="'.$addr.'">'.$i.'</button>';
+         //id="page'.$i.'"
+       }
+     }
+   ?>
+   </div>
+   <?php echo '<script>active_button("pg'.$currentpage.'")</script>' ?>
     <div class="comments">
 		<?php
-      $sql = "SELECT username, comment, time FROM pratsep_shoutbox order by time desc";
-      $result = mysqli_query($conn, $sql);
-      $pages = ceil(mysqli_num_rows($result))/10;
-      //tere
-      echo '<div class="pages">';
-      if ($pages>1 && isset($_GET['page']) && $_GET['page']>1) {
-        $pagenr1 = $_GET['page'] - 1;
-        $addr1 = "window.location.href='?page=$pagenr1'";
-        echo '<button onclick="'.$addr1.'">Previous</button>';
-      }
-      if ($pages > 1) {
-        for ($i=$_GET['page']; $i < $_GET['page'] + 10; $i++) {
-          $addr = "window.location.href='?page=$i'";
-          echo '<button onclick="'.$addr.'">'.$i.'</button>';
-        }
-      }
-      if ($pages>1 && isset($_GET['page']) && $_GET['page']<$pages) {
-        $pagenr2 = $_GET['page'] + 1;
-        $addr2 = "window.location.href='?page=$pagenr2'";
-        echo '<button onclick="'.$addr2.'">Next</button>';
-      }
-      echo '</div>';
-      if (isset($_GET['page']) && $_GET['page']>1) {
+        if (isset($_GET['page']) && $_GET['page']>1) {
         $ofset = (($_GET['page'])*10) - 10;
       }
       else{

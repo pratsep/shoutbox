@@ -15,15 +15,17 @@ function checkForm(form) {
   if (re.test(form.comment.value)) {
     alert("Error:  Textarea can not be empty!");
     form.comment.focus();
-    //form.comment.reset();
     return false;
   }
   return true;
 }
-
 function pressed(e) {
   if ( (window.event ? event.keyCode : e.which) == 13) {
     e.preventDefault();
-      document.getElementById('submit_button').click();
+    document.getElementById('submit_button').click();
   }
+}
+function active_button(lk) {
+  var el = document.getElementById(lk);
+  el.style.color = "red";
 }
