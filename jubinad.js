@@ -12,3 +12,9 @@ function checkForm(form) {
   }
   return true;
 }
+
+//function pressed(e, myform) {
+//  if ( (window.event ? event.keyCode : e.which) == 13) {
+//      document.forms["myform"].submit();
+//  }
+//}
