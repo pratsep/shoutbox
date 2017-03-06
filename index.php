@@ -4,13 +4,6 @@
     <meta charset="utf-8"/>
     <link rel="stylesheet" type="text/css" href="styles2.css">
     <script src="jubinad.js"></script>
-    <script type="text/javascript">
-    function pressed(e) {
-      if ( (window.event ? event.keyCode : e.which) == 13) {
-          document.forms["input_form"].submit();
-      }
-    }
-    </script>
     <title>MEGA SHOUTBOX</title>
     <!--<meta http-equiv="refresh" content="5">-->
   </head>
@@ -27,7 +20,7 @@
 		}
 	?>
     <div>
-		<form method="post" action="send_data.php" name="input_form" id="insert_form" onsubmit="return checkForm(this);">
+		<form method="post" action="send_data.php" id="insert_form" onsubmit="return checkForm(this);">
 			<input type="text" name="user" placeholder="Sisesta kasutaja" required/>
       <textarea name="comment" form="insert_form" placeholder="Sisesta tekst" onkeydown="pressed(event)" required></textarea>
       <input id="submit_button" type="submit" value="Postita"/>
