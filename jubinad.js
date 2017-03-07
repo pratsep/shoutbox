@@ -11,7 +11,7 @@ function checkForm(form) {
     form.user.focus();
     return false;
   }
-  re = /^\s*$/
+  re = /^\s*$/;
   if (re.test(form.comment.value)) {
     alert("Error:  Textarea can not be empty!");
     form.comment.focus();
@@ -20,7 +20,7 @@ function checkForm(form) {
   return true;
 }
 function pressed(e) {
-  if ( (window.event ? event.keyCode : e.which) == 13) {
+  if ( (window.event ? event.keyCode : e.which) === 13 && !e.shiftKey) {
     e.preventDefault();
     document.getElementById('submit_button').click();
   }

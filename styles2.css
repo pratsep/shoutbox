@@ -1,31 +1,53 @@
 body {
-	background-color: HoneyDew ;
+    //background-image: url("background/paper.gif");
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    margin: 0;
+}
+.header {
+    margin-top: 0px;
+    background-image: url("background/header.jpg");
+    height: 10em;
+    margin-bottom: 10px;
+    border-bottom: 2px solid black;
 }
 .comment {
-	background-color: ivory;
-	padding: 10px;
-	margin: 5px;
-	width: 500px;
-	border: 1px solid;
-	border-radius: 8px;
+    background-color: ivory;
+    padding: 10px;
+    margin: 5px;
+    width: 500px;
+    border: 1px solid;
+    border-radius: 8px;
+}
+.comment pre {
+    width: 450px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.input {
+    //border: 1px solid black;
+}
+.dTime {
+    color: LightSlateGrey;
+    font-size: 70%;
 }
 textarea {
-  width: 300px;
-  height: 150px;
-	display: block;
+    width: 300px;
+    height: 150px;
+    display: block;
 }
 #submit_button {
-	width: 200px;
-	height: 75px;
-  background-color: red;
+    width: 200px;
+    height: 75px;
+    background-color: red;
 }
 .pnBtn {
-	width: 150px;
+    width: 150px;
 }
 #prBtn {
 
 }
 
 .nrBtn {
-	width: 40px;
+    width: 40px;
 }
