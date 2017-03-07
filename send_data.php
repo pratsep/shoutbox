@@ -20,6 +20,10 @@
 												 values('$username','$comment', sysdate())")
 												 or die("MySQL error:" . $conn->error);
 	}
+	if(isset($_POST['delete'])) {
+		$sql = "DELETE FROM pratsep_shoutbox WHERE id='".$_POST['delete']."'";
+		mysqli_query($conn, $sql);
+	}
 	mysqli_close($conn);
 	header('Location: index.php');
 	exit();

@@ -80,7 +80,7 @@
       else{
         $ofset = 0;
       }
-  		$sql = "SELECT username, comment, time FROM pratsep_shoutbox order by time desc LIMIT 10 OFFSET $ofset";
+  		$sql = "SELECT id, username, comment, time FROM pratsep_shoutbox order by time desc LIMIT 10 OFFSET $ofset";
   		$result = mysqli_query($conn, $sql);
   		if (mysqli_num_rows($result) > 0) {
         while($row = $result->fetch_assoc()) {
@@ -88,6 +88,9 @@
     			echo '<h1>'.$row["username"].'</h1>';
     			echo '<h3>'.$row["time"].'</h3>';
     			echo '<p>'.$row["comment"].'</p>';
+          echo "<form action='send_data.php' method='post' name='deleteCmt'>";
+          echo "<input type='hidden' name='delete' value=".$row['id']." />";
+          echo "<input type='submit' value='Kustuta'/></form>";
     			//echo "User: " . $row["username"]. " - Comment: " . $row["comment"]. " " . $row["time"]. "<br>";
     			echo '</div>';
         }
