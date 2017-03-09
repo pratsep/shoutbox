@@ -24,6 +24,7 @@
                 echo '<form method="POST" action="log_out.php">';
                 echo '<button type="submit">Log out</button>';
                 echo '</form>';
+                //tere
             }
             else{
                 echo "Not logged in";
