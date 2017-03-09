@@ -1,31 +1,75 @@
 body {
-	background-color: HoneyDew ;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    margin: 0;
+    background-image: url("background/header.jpg");
+}
+.pgHeader {
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background-image: url("background/header.jpg");
+    height: 10em;
+    border-bottom: 2px solid black;
+}
+/*
+#pgLeft {
+    border-right: 2px solid black;
+    height: 100%;
+    width: 50px;
+    float: left;
+    //background-image: url("background/header.jpg");
+}
+#pgRight {
+    border-left: 2px solid black;
+    height: 100%;
+    width: 50px;
+    float: right;
+    //background-image: url("background/header.jpg");
+}
+*/
+.pgBody {
+    background-color: white;
+    margin-top: 10em;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 0px;
+    border: 2px solid black;
+    padding-left: 10px;
 }
 .comment {
-	background-color: ivory;
-	padding: 10px;
-	margin: 5px;
-	width: 500px;
-	border: 1px solid;
-	border-radius: 8px;
+    padding: 10px;
+    background-color: ivory;
+    margin: 5px;
+    width: 500px;
+    border: 1px solid;
+    border-radius: 8px;
+}
+.comment pre {
+    width: 450px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.dTime {
+    color: LightSlateGrey;
+    font-size: 70%;
 }
 textarea {
-  width: 300px;
-  height: 150px;
-	display: block;
+    width: 300px;
+    height: 150px;
+    display: block;
 }
 #submit_button {
-	width: 200px;
-	height: 75px;
-  background-color: red;
+    width: 200px;
+    height: 75px;
+    background-color: red;
 }
 .pnBtn {
-	width: 150px;
+    width: 150px;
 }
 #prBtn {
 
 }
-
 .nrBtn {
-	width: 40px;
+    width: 40px;
 }

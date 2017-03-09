@@ -17,8 +17,8 @@
 		$username = test_input($_POST['user']);
 		$comment = test_input($_POST['comment']);
 		mysqli_query($conn, "insert into pratsep_shoutbox(username, comment, time)
-												 values('$username','$comment', sysdate())")
-												 or die("MySQL error:" . $conn->error);
+							   values('$username','$comment', sysdate())")
+		or die("MySQL error:" . $conn->error);
 	}
 	if(isset($_POST['delete'])) {
 		$sql = "DELETE FROM pratsep_shoutbox WHERE id='".$_POST['delete']."'";
