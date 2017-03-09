@@ -29,3 +29,6 @@ function active_button(lk) {
   var el = document.getElementById(lk);
   el.style.color = "red";
 }
+function error() {
+    alert("Error:  Username or password invalid!");
+}

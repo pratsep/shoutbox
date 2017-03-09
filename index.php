@@ -9,15 +9,8 @@
 </head>
 <body>
     <?php
-        $servername = "localhost";
-        $username = "test";
-        $password = "t3st3r123";
-        $dbname = "test";
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Ei saanud ühendada: ".$conn->connect_error);
-        }
+        session_start();
+        include("config.php");
     ?>
     <!--
     <div class="pgHeader"></div>
@@ -25,6 +18,56 @@
     <div id="pgRight"></div>
     -->
     <div class="pgBody">
+        <?php
+            if (isset($_SESSION['login_user'])) {
+                echo "Logged in as: " . $_SESSION["login_user"] . ".";
+            }
+            else{
+                echo "Not logged in";
+            }
+        ?>
+        <div class="logInOut">
+            <form method="post" action="" id="login_form">
+                <input type="text" name="userID" placeholder="Username" required/>
+                <input type="text" name="userPW" placeholder="Password" required/>
+                <input id="login_button" type="submit" value="Log in"/>
+            </form>
+            <?php
+                if(isset($_SESSION['login_user'])) {
+                    echo '<form method="POST" action="log_out.php">';
+                    echo '<button type="submit">Log out</button>';
+                    echo '</form>';
+                }
+            ?>
+        </div>
+        <?php
+        if(!isset($_SESSION['login_user'])) {
+            //session_start();
+            //include("config.php");
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // username and password sent from form
+
+                $myusername = mysqli_real_escape_string($conn, $_POST['userID']);
+                $mypassword = mysqli_real_escape_string($conn, $_POST['userPW']);
+
+                $sql = "SELECT id FROM pratsep_users WHERE username = '$myusername' and password = '$mypassword'";
+                $result = mysqli_query($conn, $sql);
+                $count = mysqli_num_rows($result);
+
+                // If result matched $myusername and $mypassword, table row must be 1 row
+
+                if ($count == 1) {
+                    $_SESSION['login_user'] = $myusername;
+                    header('Location: index.php');
+                    //echo "Logged in as: " . $_SESSION["login_user"] . ".";
+                } else {
+                    //header('Location: index.php');
+                    echo '<script>error()</script>';
+
+                }
+            }
+        }
+        ?>
         <div class="input">
             <div style="color: red; width: 300px; auto; position: relative; left: 350px; top: 100px">SHIFT+ENTER VAHETAB RIDA OKEI?</div>
             <form method="post" action="send_data.php" id="insert_form" onsubmit="return checkForm(this);">
@@ -80,7 +123,7 @@
             ?>
         </div>
         <?php
-            echo '<script>active_button("pg'.$currentpage.'")</script>'
+            echo '<script>active_button("pg'.$currentpage.'")</script>';
         ?>
         <div class="comments">
             <?php
