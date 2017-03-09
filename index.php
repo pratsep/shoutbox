@@ -20,54 +20,28 @@
     <div class="pgBody">
         <?php
             if (isset($_SESSION['login_user'])) {
-                echo "Logged in as: " . $_SESSION["login_user"] . ".";
+                echo "Logged in as: " . $_SESSION["login_user"];
+                echo '<form method="POST" action="log_out.php">';
+                echo '<button type="submit">Log out</button>';
+                echo '</form>';
             }
             else{
                 echo "Not logged in";
+                echo '<div class="logInOut">';
+                echo '<form method="post" action="log_in.php" id="login_form">';
+                echo '<input type="text" name="userID" placeholder="Username" required/>';
+                echo '<input type="text" name="userPW" placeholder="Password" required/>';
+                echo '<input id="login_button" type="submit" value="Log in"/>';
+                echo '</form>';
+                if (isset($_GET['wronglogin'])) {
+                    if ($_GET['wronglogin'] == 1) {
+                        echo 'Invalid username or password';
+                    }
+                }
+                echo '</div>';
             }
         ?>
-        <div class="logInOut">
-            <form method="post" action="" id="login_form">
-                <input type="text" name="userID" placeholder="Username" required/>
-                <input type="text" name="userPW" placeholder="Password" required/>
-                <input id="login_button" type="submit" value="Log in"/>
-            </form>
-            <?php
-                if(isset($_SESSION['login_user'])) {
-                    echo '<form method="POST" action="log_out.php">';
-                    echo '<button type="submit">Log out</button>';
-                    echo '</form>';
-                }
-            ?>
-        </div>
-        <?php
-        if(!isset($_SESSION['login_user'])) {
-            //session_start();
-            //include("config.php");
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                // username and password sent from form
 
-                $myusername = mysqli_real_escape_string($conn, $_POST['userID']);
-                $mypassword = mysqli_real_escape_string($conn, $_POST['userPW']);
-
-                $sql = "SELECT id FROM pratsep_users WHERE username = '$myusername' and password = '$mypassword'";
-                $result = mysqli_query($conn, $sql);
-                $count = mysqli_num_rows($result);
-
-                // If result matched $myusername and $mypassword, table row must be 1 row
-
-                if ($count == 1) {
-                    $_SESSION['login_user'] = $myusername;
-                    header('Location: index.php');
-                    //echo "Logged in as: " . $_SESSION["login_user"] . ".";
-                } else {
-                    //header('Location: index.php');
-                    echo '<script>error()</script>';
-
-                }
-            }
-        }
-        ?>
         <div class="input">
             <div style="color: red; width: 300px; auto; position: relative; left: 350px; top: 100px">SHIFT+ENTER VAHETAB RIDA OKEI?</div>
             <form method="post" action="send_data.php" id="insert_form" onsubmit="return checkForm(this);">
