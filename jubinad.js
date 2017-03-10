@@ -4,6 +4,15 @@
 //    return re.test(str);
 //  }
 var re = /^\w+$/;
+function checkFormNoUser(form) {
+    re = /^\s*$/;
+    if (re.test(form.comment.value)) {
+        alert("Error:  Textarea can not be empty!");
+        form.comment.focus();
+        return false;
+    }
+    return true;
+}
 function checkForm(form) {
   re = /^\w+$/;
   if(!re.test(form.user.value)) {
@@ -28,7 +37,4 @@ function pressed(e) {
 function active_button(lk) {
   var el = document.getElementById(lk);
   el.style.color = "red";
-}
-function error() {
-    alert("Error:  Username or password invalid!");
 }

@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include("config.php");
 	function test_input($data) {
 	  $data = trim($data);
@@ -11,6 +12,13 @@
 		$comment = test_input($_POST['comment']);
 		mysqli_query($conn, "insert into pratsep_shoutbox(username, comment, time)
 							   values('$username','$comment', sysdate())")
+		or die("MySQL error:" . $conn->error);
+	}
+	if(isset($_SESSION['login_user']) && isset($_POST['comment']) ){
+		$username = test_input($_SESSION['login_user']);
+		$comment = test_input($_POST['comment']);
+		mysqli_query($conn, "insert into pratsep_shoutbox(username, comment, time)
+								   values('$username','$comment', sysdate())")
 		or die("MySQL error:" . $conn->error);
 	}
 	if(isset($_POST['delete'])) {

@@ -18,7 +18,13 @@
     <div id="pgRight"></div>
     -->
     <div class="pgBody">
+
         <?php
+            if(!isset($_SESSION['login_user'])) {
+                echo '<form method="POST" action="register_user.php">';
+                echo '<input id="registerBtn" type="submit" value="Register" formtarget="_blank"/>';
+                echo '</form>';
+            }
             if (isset($_SESSION['login_user'])) {
                 echo "Logged in as: " . $_SESSION["login_user"];
                 echo '<form method="POST" action="log_out.php">';
@@ -41,16 +47,24 @@
                 }
                 echo '</div>';
             }
+            echo '<div class="input">';
+            echo '    <div style="color: red; width: 300px; auto; position: relative; left: 350px; top: 100px">SHIFT+ENTER VAHETAB RIDA OKEI?</div>';
+                if (isset($_SESSION['login_user'])){
+                    echo '    <form method="post" action="send_data.php" id="insert_form" onsubmit="return checkFormNoUser(this);">';
+                }
+                else {
+                    echo '    <form method="post" action="send_data.php" id="insert_form" onsubmit="return checkForm(this);">';
+                }
+                if (!isset($_SESSION['login_user'])){
+                    echo '<input type="text" name="user" placeholder="Sisesta kasutaja" required/>';
+                }
+            echo '        <textarea id="txtArea" name="comment" form="insert_form" placeholder="Sisesta tekst" onkeydown="pressed(event)" required></textarea>';
+            echo '        <input id="submit_button" type="submit" value="Postita"/>';
+            echo '    </form>';
+            echo '</div>';
         ?>
 
-        <div class="input">
-            <div style="color: red; width: 300px; auto; position: relative; left: 350px; top: 100px">SHIFT+ENTER VAHETAB RIDA OKEI?</div>
-            <form method="post" action="send_data.php" id="insert_form" onsubmit="return checkForm(this);">
-                <input type="text" name="user" placeholder="Sisesta kasutaja" required/>
-                <textarea name="comment" form="insert_form" placeholder="Sisesta tekst" onkeydown="pressed(event)" required></textarea>
-                <input id="submit_button" type="submit" value="Postita"/>
-            </form>
-        </div>
+
 
         <div class="pages">
             <?php
@@ -118,10 +132,13 @@
                         echo '<h1>'.$row["username"].'</h1>';
                         echo '<pre>'.$row["comment"].'</pre>';
                         echo '<p class="dTime">'.$newDate.'</p>';
-                        echo "<form action='send_data.php' method='post' name='deleteCmt'>";
-                        echo "<input type='hidden' name='delete' value=".$row['id']." />";
-                        echo "<input type='submit' value='Kustuta'/></form>";
-                        //echo "User: " . $row["username"]. " - Comment: " . $row["comment"]. " " . $row["time"]. "<br>";
+                        if (isset($_SESSION['login_user'])){
+                            if (strcasecmp($row['username'], $_SESSION['login_user']) == 0) {
+                                echo "<form action='send_data.php' method='post' name='deleteCmt'>";
+                                echo "<input type='hidden' name='delete' value=".$row['id']." />";
+                                echo "<input type='submit' value='Kustuta'/></form>";
+                            }
+                        }
                         echo '</div>';
                     }
                 }
