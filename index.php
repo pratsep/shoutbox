@@ -59,15 +59,19 @@
                     echo '<input type="text" name="user" placeholder="Sisesta kasutaja" required/>';
                 }
             echo '        <textarea id="txtArea" name="comment" form="insert_form" placeholder="Sisesta tekst" onkeydown="pressed(event)" required></textarea>';
-            echo '        <input id="submit_button" type="submit" value="Postita"/>';
+            echo '        <input id="submit_button" type="submit" value="Post"/>';
             echo '    </form>';
             echo '</div>';
         ?>
-
-
-
+        
         <div class="pages">
             <?php
+                if (isset($_GET['notUser'])) {
+                    if ($_GET['notUser'] == 1) {
+                        echo 'Username you are trying to use is already registered as a user</br>';
+                        echo 'Choose another username</br>';
+                    }
+                }
                 $sql = "SELECT username, comment, time FROM pratsep_shoutbox order by time desc";
                 $result = mysqli_query($conn, $sql);
                 $pages = ceil(mysqli_num_rows($result))/10;
@@ -136,7 +140,7 @@
                             if (strcasecmp($row['username'], $_SESSION['login_user']) == 0) {
                                 echo "<form action='send_data.php' method='post' name='deleteCmt'>";
                                 echo "<input type='hidden' name='delete' value=".$row['id']." />";
-                                echo "<input type='submit' value='Kustuta'/></form>";
+                                echo "<input type='submit' value='Delete post'/></form>";
                             }
                         }
                         echo '</div>';
