@@ -1,8 +1,7 @@
-//  function checkPassword(str)
-//  {
-//    var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-//    return re.test(str);
-//  }
+//window.addEventListener("load", function() {
+//window.addEventListener("DOMContentLoaded", function() {
+    //mida teha kui leht on laetud
+//})
 var re = /^\w+$/;
 function checkFormNoUser(form) {
     re = /^\s*$/;

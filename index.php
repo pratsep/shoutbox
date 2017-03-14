@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" type="text/css" href="styles2.css">
     <script src="jubinad.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles2.css">
     <title>MEGA SHOUTBOX</title>
     <!--<meta http-equiv="refresh" content="5">-->
 </head>
@@ -63,7 +63,7 @@
             echo '    </form>';
             echo '</div>';
         ?>
-        
+
         <div class="pages">
             <?php
                 if (isset($_GET['notUser'])) {
@@ -137,7 +137,7 @@
                         echo '<pre>'.$row["comment"].'</pre>';
                         echo '<p class="dTime">'.$newDate.'</p>';
                         if (isset($_SESSION['login_user'])){
-                            if (strcasecmp($row['username'], $_SESSION['login_user']) == 0) {
+                            if (strcasecmp($row['username'], $_SESSION['login_user']) == 0 || $_SESSION['login_user'] == "admin") {
                                 echo "<form action='send_data.php' method='post' name='deleteCmt'>";
                                 echo "<input type='hidden' name='delete' value=".$row['id']." />";
                                 echo "<input type='submit' value='Delete post'/></form>";
