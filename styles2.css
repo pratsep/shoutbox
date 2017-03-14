@@ -11,22 +11,6 @@ body {
     height: 10em;
     border-bottom: 2px solid black;
 }
-/*
-#pgLeft {
-    border-right: 2px solid black;
-    height: 100%;
-    width: 50px;
-    float: left;
-    //background-image: url("background/header.jpg");
-}
-#pgRight {
-    border-left: 2px solid black;
-    height: 100%;
-    width: 50px;
-    float: right;
-    //background-image: url("background/header.jpg");
-}
-*/
 .pgBody {
     background-color: white;
     margin-top: 10em;
@@ -48,6 +32,9 @@ body {
     left: 0;
     right: 0;
     margin: auto;
+}
+.comments {
+    clear: both;
 }
 .comment {
     padding: 10px;
@@ -77,12 +64,27 @@ textarea {
     height: 75px;
     background-color: red;
 }
-.pnBtn {
-    width: 150px;
+#prBtn, #ntBtn{
+    height: 25px;
+    width: 100px;
+    float: left;
 }
-#prBtn {
-
+#pageButtons, .prvnxtButtons {
+    float: left;
+    height: 30px;
 }
-.nrBtn {
+.prvnxtButtons, #previousButton, #nextButton {
+    width: 100px;
+    height: 25px;
+}
+.numberButton {
     width: 40px;
+    height: 25px;
+    //float: left;
+}
+.pages {
+    margin: 5px;
+    overflow: hidden;
+    //position: relative;
+    //left: 300px;
 }

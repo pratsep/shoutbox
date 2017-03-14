@@ -74,7 +74,7 @@
                 }
                 $sql = "SELECT username, comment, time FROM pratsep_shoutbox order by time desc";
                 $result = mysqli_query($conn, $sql);
-                $pages = ceil(mysqli_num_rows($result))/10;
+                $pages = ceil(mysqli_num_rows($result)/10);
                 if (!isset($_GET['page'])) {
                   $currentpage=1;
                 }
@@ -82,18 +82,48 @@
                   $currentpage=$_GET['page'];
                 }
                 //previous
+                echo '<div class="prvnxtButtons">';
                 if ($pages>1 && isset($_GET['page']) && $currentpage>1) {
                   $pagenr1 = $_GET['page'] - 1;
                   $addr1 = "window.location.href='?page=$pagenr1'";
-                  echo '<button class="pnBtn" id="prBtn" onclick="'.$addr1.'">Previous page</button>';
+                  echo '<button id="previousButton" onclick="'.$addr1.'">Previous page</button>';
                 }
-                //next
-                if ($pages>1 && $currentpage<$pages) {
-                  $pagenr2 = $currentpage + 1;
-                  $addr2 = "window.location.href='?page=$pagenr2'";
-                  echo '<button class="pnBtn" id="ntBtn" onclick="'.$addr2.'">Next page</button>';
-                }
+                echo '</div>';
                 //page buttons
+                echo '<div id="pageButtons">';
+                if ($pages > 1 && $currentpage < 6) {
+                    if($pages-$currentpage>4){
+                        for ($i=1; $i < 10; $i++) {
+                            $addr = "window.location.href='?page=$i'";
+                            echo '<button class="numberButton" id="pg' . $i . '" onclick="' . $addr . '">' . $i . '</button>';
+                            //id="page'.$i.'"
+                        }
+                    }
+                }
+                else if($pages > 1 && $currentpage >= 6 && $currentpage + 3 < $pages) {
+                    for ($i=$currentpage-4; $i < $currentpage+5; $i++) {
+                        $addr = "window.location.href='?page=$i'";
+                        echo '<button class="numberButton" id="pg' . $i . '" onclick="' . $addr . '">' . $i . '</button>';
+                        //id="page'.$i.'"
+                    }
+                }
+                else {
+                    for ($i=$pages-8; $i < $pages+1; $i++) {
+                        $addr = "window.location.href='?page=$i'";
+                        echo '<button class="numberButton" id="pg' . $i . '" onclick="' . $addr . '">' . $i . '</button>';
+                        //id="page'.$i.'"
+                    }
+                }
+                echo '</div>';
+                //next
+                echo '<div class="prvnxtButtons">';
+                if ($pages>1 && $currentpage<$pages) {
+                    $pagenr2 = $currentpage + 1;
+                    $addr2 = "window.location.href='?page=$pagenr2'";
+                    echo '<button id="nextButton" onclick="'.$addr2.'">Next page</button>';
+                }
+                echo '</div>'
+            /*
                 if ($pages > 1) {
                   if ($currentpage-4<1) {
                     $underpage = abs($currentpage-5);
@@ -109,10 +139,11 @@
                   }
                   for ($i=$currentpage-4+$underpage; $i < $currentpage+5-$overpage; $i++) {
                     $addr = "window.location.href='?page=$i'";
-                    echo '<button class="nrBtn" id="pg'.$i.'" onclick="'.$addr.'">'.$i.'</button>';
+                    echo '<button class="numberButton" id="pg'.$i.'" onclick="'.$addr.'">'.$i.'</button>';
                     //id="page'.$i.'"
                   }
                 }
+            */
             ?>
         </div>
         <?php
