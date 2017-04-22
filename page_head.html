@@ -8,8 +8,35 @@
     <!--<meta http-equiv="refresh" content="5">-->
 </head>
 <body>
-<?php
+    <?php
         session_start();
         include("config.php");
+        echo '<div class="logInOut">';
+        if (isset($_SESSION['login_user'])) {
+            echo "Logged in as: " . $_SESSION["login_user"];
+            echo '<form method="POST" action="log_out.php">';
+            echo    '<button type="submit">Log out</button>';
+            echo '</form>';
+        }
+        else{
+            echo "Not logged in";
+            echo '<form method="post" action="log_in.php" id="login_form">';
+            echo    '<input type="text" name="userID" placeholder="Username" required/>';
+            echo    '<input type="password" name="userPW" placeholder="Password" required/>';
+            echo    '<input id="login_button" type="submit" value="Log in"/>';
+            echo '</form>';
+            if (isset($_GET['wronglogin'])) {
+                if ($_GET['wronglogin'] == 1) {
+                    echo 'Invalid username or password';
+                }
+            }
+        }
+        echo '</div>';
     ?>
+    <div id="navigation">
+        <ul>
+            <li><a href="?navigate=posts">Posts</a></li>
+            <li id="regi"><a href="?navigate=register">Register user</a></li>
+        </ul>
+    </div>
 <div class="pgBody">
