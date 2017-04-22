@@ -1,23 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <script src="jubinad.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles2.css">
-    <title>MEGA SHOUTBOX</title>
-    <!--<meta http-equiv="refresh" content="5">-->
-</head>
-<body>
-    <?php
-        session_start();
-        include("config.php");
-    ?>
-    <!--
-    <div class="pgHeader"></div>
-    <div id="pgLeft"></div>
-    <div id="pgRight"></div>
-    -->
-    <div class="pgBody">
+<?php require_once("page_head.html"); ?>
 
         <?php
             if(!isset($_SESSION['login_user'])) {
@@ -37,7 +18,7 @@
                 echo '<div class="logInOut">';
                 echo '<form method="post" action="log_in.php" id="login_form">';
                 echo '<input type="text" name="userID" placeholder="Username" required/>';
-                echo '<input type="text" name="userPW" placeholder="Password" required/>';
+                echo '<input type="password" name="userPW" placeholder="Password" required/>';
                 echo '<input id="login_button" type="submit" value="Log in"/>';
                 echo '</form>';
                 if (isset($_GET['wronglogin'])) {
@@ -68,8 +49,8 @@
             <?php
                 if (isset($_GET['notUser'])) {
                     if ($_GET['notUser'] == 1) {
-                        echo 'Username you are trying to use is already registered as a user</br>';
-                        echo 'Choose another username</br>';
+                        echo 'Username you are trying to use is already registered as a user<br/>';
+                        echo 'Choose another username<br/>';
                     }
                 }
                 $sql = "SELECT username, comment, time FROM pratsep_shoutbox order by time desc";
@@ -123,27 +104,6 @@
                     echo '<button id="nextButton" onclick="'.$addr2.'">Next page</button>';
                 }
                 echo '</div>'
-            /*
-                if ($pages > 1) {
-                  if ($currentpage-4<1) {
-                    $underpage = abs($currentpage-5);
-                  }
-                  else {
-                    $underpage = 0;
-                  }
-                  if ($currentpage+4>$pages) {
-                    $overpage = $currentpage+4-$pages;
-                  }
-                  else {
-                    $overpage = 0;
-                  }
-                  for ($i=$currentpage-4+$underpage; $i < $currentpage+5-$overpage; $i++) {
-                    $addr = "window.location.href='?page=$i'";
-                    echo '<button class="numberButton" id="pg'.$i.'" onclick="'.$addr.'">'.$i.'</button>';
-                    //id="page'.$i.'"
-                  }
-                }
-            */
             ?>
         </div>
         <?php
@@ -182,9 +142,4 @@
                 }
             ?>
         </div>
-    </div>
-    <?php
-        mysqli_close($conn);
-    ?>
-</body>
-</html>
+<?php require_once("page_foot.html"); ?>

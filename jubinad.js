@@ -1,7 +1,3 @@
-//window.addEventListener("load", function() {
-//window.addEventListener("DOMContentLoaded", function() {
-    //mida teha kui leht on laetud
-//})
 var re = /^\w+$/;
 function checkFormNoUser(form) {
     re = /^\s*$/;
