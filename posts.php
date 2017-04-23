@@ -58,9 +58,7 @@ if ($pages>1 && $currentpage<$pages) {
 }
 echo '</div>';
 echo '</div>';
-
 echo '<script>active_button("pg'.$currentpage.'")</script>';
-
 echo '<div class="comments">';
 if (isset($_GET['page']) && $_GET['page']>1) {
     $ofset = (($_GET['page'])*10) - 10;
@@ -85,6 +83,25 @@ if (mysqli_num_rows($result) > 0) {
                 echo "<input type='submit' value='Delete post'/></form>";
             }
         }
+
+
+        echo '<div class="bigPic">';
+        echo '<img src="" id="bigPicInside"/>';
+        echo '</div>';
+        $directory = "images/";
+        $files = glob($directory . "*");
+        foreach ($files as $key => $oneFile) {
+            $array1 = explode("/",$oneFile);
+            $array2 = explode(".",$array1[1]);
+            $id = $array2[0];
+            if ($id == $row['id']){
+                echo '<img src="'.$files[$key].'" width="200" height="200" class="pic"/>';
+            }
+
+        }
+
+
+
         echo '</div>';
     }
 }
