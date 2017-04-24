@@ -16,6 +16,10 @@ switch($navigate){
     case "register":
         include("register_user.php");
         break;
+    case "gallery":
+        include("gallery_page.php");
+
+        break;
 
     default:
         include("user_input.php");
