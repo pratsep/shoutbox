@@ -9,28 +9,16 @@
     <!--<meta http-equiv="refresh" content="5">-->
 </head>
 <body>
+<div class="bigPic">
+    <img src="" id="bigPicInside"/>
+</div>
 <?php
-        session_start();
-        include("config.php");
-        echo '<div class="logInOut">';
+echo '<div class="logInOut">';
 if (isset($_SESSION['login_user'])) {
-echo "Logged in as: " . $_SESSION["login_user"];
-echo '<form method="POST" action="log_out.php">';
-    echo    '<button type="submit">Log out</button>';
-    echo '</form>';
+    echo "Logged in as: " . $_SESSION["login_user"];
 }
 else{
-echo "Not logged in";
-echo '<form method="post" action="log_in.php" id="login_form">';
-    echo    '<input type="text" name="userID" placeholder="Username" required/>';
-    echo    '<input type="password" name="userPW" placeholder="Password" required/>';
-    echo    '<input id="login_button" type="submit" value="Log in"/>';
-    echo '</form>';
-if (isset($_GET['wronglogin'])) {
-if ($_GET['wronglogin'] == 1) {
-echo 'Invalid username or password';
-}
-}
+    echo "Not logged in";
 }
 echo '</div>';
 ?>
@@ -39,6 +27,33 @@ echo '</div>';
         <li><a href="?navigate=posts">Posts</a></li>
         <li><a href="?navigate=gallery">Gallery</a></li>
         <li id="regi"><a href="?navigate=register">Register user</a></li>
+        <?php
+        if (isset($_SESSION['login_user'])){
+            echo '<li id="lout"><a href="?navigate=logout">Log out</a></li>';
+        }
+        else{
+            echo '<li id="lin"><a href="?navigate=login">Log in</a></li>';
+        }
+        ?>
+
     </ul>
 </div>
+
+<?php if((isset($_GET['navigate']) && $_GET['navigate'] == "posts") || (isset($_GET['page']) && $_GET['page'] == "1") || empty($_GET)): ?>
+        <script>
+            function refresh_div() {
+                jQuery.ajax({
+                    url:'posts.php',
+                    type:'POST',
+                    success:function(results) {
+                        jQuery(".comments").html(results);
+                        imgClick();
+                    }
+                });
+            }
+
+            t = setInterval(refresh_div,1000);
+        </script>
+<?php endif; ?>
+
 <div class="pgBody">

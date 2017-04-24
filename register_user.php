@@ -5,38 +5,3 @@
         <input type="submit" value="Create user" required/>
     </form>
 </div>
-<?php
-    function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-    function NewUser() {
-        global $conn;
-        if(isset($_POST['newUser']) && isset($_POST['newPw']) ) {
-            $username = test_input(mysqli_real_escape_string($conn, $_POST['newUser']));
-            $password = test_input(mysqli_real_escape_string($conn, $_POST['newPw']));
-            $sql = mysqli_query($conn, "insert into pratsep_users(username, password)
-							                        values('$username','$password')")
-            or die("MySQL error:" . $conn->error);
-        }
-        echo 'REGISTRATION COMPLETE!';
-    }
-    function SignUp() {
-        global $conn;
-        if(isset($_POST['newUser']) && isset($_POST['newPw'])) {
-            $sql = mysqli_query($conn, "SELECT * FROM pratsep_users WHERE username = '$_POST[newUser]'");
-            $count = mysqli_num_rows($sql);
-            if($count < 1 ) {
-                newuser();
-            }
-            else {
-                echo 'USERNAME ALREADY IN USE!';
-            }
-        }
-    }
-    if(isset($_POST['newUser']) && isset($_POST['newPw'])) {
-        SignUp();
-    }
-?>

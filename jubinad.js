@@ -1,4 +1,7 @@
-window.onload = function() {
+function focusTextArea() {
+$("#txtArea").focus();
+}
+function imgClick(){
     $('.pic').on('click', function () {
         var tmpImg = new Image();
         var src = $(this).attr('src');
@@ -36,7 +39,10 @@ window.onload = function() {
     $('.bigPic').on('click', function () {
         $('.bigPic').css({"display": "none", "opacity": "0"});
     });
-
+}
+window.onload = function() {
+    imgClick();
+    focusTextArea();
 }
 var re = /^\w+$/;
 function checkFormNoUser(form) {

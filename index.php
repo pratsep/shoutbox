@@ -1,7 +1,8 @@
-<?php require_once("page_head.html"); ?>
-
-
 <?php
+session_start();
+include("functions.php");
+include("page_head.html");
+
 if(!empty($_GET) && isset($_GET['navigate'])){
     $navigate = htmlspecialchars($_GET['navigate']);
 }
@@ -14,13 +15,17 @@ switch($navigate){
         include("posts.php");
         break;
     case "register":
-        include("register_user.php");
+        register();
         break;
     case "gallery":
-        include("gallery_page.php");
-
+        gallery();
         break;
-
+    case "logout":
+        logout();
+        break;
+    case "login":
+        login();
+        break;
     default:
         include("user_input.php");
         include("posts.php");

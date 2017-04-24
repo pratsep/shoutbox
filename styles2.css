@@ -4,6 +4,9 @@ body {
     background-image: url("background/header.jpg");
 }
 .logInOut {
+    //float: right;
+    position: relative;
+    top: 100px;
     margin-left: 50px;
 }
 .pgHeader {
@@ -90,6 +93,12 @@ textarea {
     //position: relative;
     //left: 300px;
 }
+#lout{
+    float: right;
+}
+#lin{
+    float: right;
+}
 ul {
     list-style-type: none;
     margin-left: 50px;
@@ -97,24 +106,40 @@ ul {
     margin-right: 50px;
     padding: 0;
     overflow: hidden;
-    background-color: cornsilk;
+    //background-color: cornsilk;
 }
-
+.loginForm {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
 li {
     float: left;
 }
 
 li a {
+
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    border: none;
     display: block;
     color: black;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    border-radius: 5px;
+    background-color: beige;
+    margin: 2px;
 }
 li a:hover {
     background-color: sandybrown;
 }
 #regi {
+    //margin-left: 100px;
     //float: right;
 }
 .bigPic {
