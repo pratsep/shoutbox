@@ -1,0 +1,12 @@
+<div>
+    <p>There are <strong><?php echo $count ?></strong> total registered users:</p>
+    <ol>
+        <?php foreach($posts as $user=>$postnr): ?>
+        <li>User: <strong><?php echo $user; ?></strong> with <strong><?php echo $postnr; ?></strong> posts.</li></br>
+        <?php endforeach; ?>
+    </ol>
+
+
+
+    <p>Last registered user is <strong><?php echo $lastuser['username'] ?></strong></p>
+</div>

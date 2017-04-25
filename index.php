@@ -26,6 +26,12 @@ switch($navigate){
     case "login":
         login();
         break;
+    case "userdata":
+        user_data();
+        break;
+    case "userposts":
+        search_user();
+        break;
     default:
         include("user_input.php");
         include("posts.php");
