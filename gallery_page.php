@@ -1,7 +1,4 @@
 <div class="pildid">
-    <div class="bigPic">
-        <img src="" id="bigPicInside"/>
-    </div>
     <?php
     foreach ($files as $oneFile) {
         echo '<div class="smallPic">';

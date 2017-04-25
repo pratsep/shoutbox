@@ -12,11 +12,12 @@ if (!isset($_SESSION['login_user'])){
 echo '        <textarea id="txtArea" name="comment" form="insert_form" placeholder="Sisesta tekst" onkeydown="pressed(event)" required></textarea>';
 ?>
     <div class="sisestus">
+        Lisa pilt</br>
         <input type="file" name="image"></br>
     </div>
     <input id="submit_button" type="submit" value="Post"/>
     </form>
-    </div>
+</div>
 
     <div class="pages">
 <?php
