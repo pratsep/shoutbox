@@ -1,3 +1,13 @@
+function refresh_div() {
+    jQuery.ajax({
+        url:'posts.php',
+        type:'POST',
+        success:function(results) {
+            jQuery(".comments").html(results);
+            imgClick();
+        }
+    });
+}
 function focusTextArea() {
 $("#txtArea").focus();
 }
