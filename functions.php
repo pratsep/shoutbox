@@ -1,5 +1,15 @@
 <?php
-include("config.php");
+function configDB(){
+    global $conn;
+    $servername = "localhost";
+    $username = "test";
+    $password = "t3st3r123";
+    $dbname = "test";
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Ei saanud ühendada: ".$conn->connect_error);
+    }
+}
 function login(){
     require_once("log_in.php");
     if(!isset($_SESSION['login_user'])) {
@@ -27,33 +37,35 @@ function login(){
 }
 function search_user(){
     include('userposts_page.html');
-    if(isset($_GET['search'])) {
-        global $conn;
-        $searched_username = mysqli_real_escape_string($conn, $_GET['search']);
-        $sql = "SELECT id, username, comment, time FROM pratsep_shoutbox WHERE username = '$searched_username' order by time desc";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $date = new DateTime($row["time"]);
-                $newDate = $date->format('H:i:s d-m-Y');
-                echo '<div class ="comment">';
-                echo '<h1>' . $row["username"] . '</h1>';
-                echo '<pre>' . $row["comment"] . '</pre>';
-                echo '<p class="dTime">' . $newDate . '</p>';
-                $directory = "images/";
-                $files = glob($directory . "*");
-                foreach ($files as $key => $oneFile) {
-                    $array1 = explode("/", $oneFile);
-                    $array2 = explode(".", $array1[1]);
-                    $id = $array2[0];
-                    if ($id == $row['id']) {
-                        echo '<img src="' . $files[$key] . '" width="200" height="200" class="pic"/>';
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['search'])) {
+            global $conn;
+            $searched_username = mysqli_real_escape_string($conn, $_POST['search']);
+            $sql = "SELECT id, username, comment, time FROM pratsep_shoutbox WHERE username = '$searched_username' order by time desc";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $date = new DateTime($row["time"]);
+                    $newDate = $date->format('H:i:s d-m-Y');
+                    echo '<div class ="comment">';
+                    echo '<h1>' . $row["username"] . '</h1>';
+                    echo '<pre>' . $row["comment"] . '</pre>';
+                    echo '<p class="dTime">' . $newDate . '</p>';
+                    $directory = "images/";
+                    $files = glob($directory . "*");
+                    foreach ($files as $key => $oneFile) {
+                        $array1 = explode("/", $oneFile);
+                        $array2 = explode(".", $array1[1]);
+                        $id = $array2[0];
+                        if ($id == $row['id']) {
+                            echo '<img src="' . $files[$key] . '" width="200" height="200" class="pic"/>';
+                        }
                     }
+                    echo '</div>';
                 }
-                echo '</div>';
+            } else {
+                echo "<h2>Ühtegi sõnumit pole!</h2>";
             }
-        } else {
-            echo "<h2>Ühtegi sõnumit pole!</h2>";
         }
     }
 

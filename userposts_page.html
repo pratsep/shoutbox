@@ -1,5 +1,5 @@
 <div>
-    <form method="GET" action="">
+    <form method="POST" action="?navigate=userposts">
         <input type="text" name="search" placeholder="Search username" required/>
         <input type="hidden" name="navigate" value="<?php echo htmlspecialchars($_GET['navigate']);?>">
         <input type="submit" value="Search"/>

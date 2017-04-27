@@ -1,6 +1,7 @@
 <?php
 session_start();
-include("config.php");
+include("functions.php");
+configDB();
 
 function add_picture($rowid) {
     if (isset($_FILES['image'])) {
@@ -36,14 +37,6 @@ function add_picture($rowid) {
             print_r($errors);
         }
     }
-}
-
-
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
 }
 $isUser = 0;
 if(isset($_POST['user']) && isset($_POST['comment']) ){
