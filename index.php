@@ -4,6 +4,7 @@ include("functions.php");
 configDB();
 include("page_head.html");
 
+
 if(!empty($_GET) && isset($_GET['navigate'])){
     $navigate = htmlspecialchars($_GET['navigate']);
 }

@@ -10,6 +10,16 @@ function configDB(){
         die("Ei saanud ühendada: ".$conn->connect_error);
     }
 }
+function update_pw(){
+    global $conn;
+    $select_query = "SELECT * FROM pratsep_users WHERE id<28";
+    $result = mysqli_query($conn, $select_query);
+    while($row = mysqli_fetch_assoc($result)){
+        $update_query = "UPDATE pratsep_users SET password = SHA1('{$row['password']}') WHERE id = {$row['id']}";
+        mysqli_query($conn, $update_query);
+    }
+
+}
 function login(){
     require_once("log_in.php");
     if(!isset($_SESSION['login_user'])) {
@@ -18,7 +28,7 @@ function login(){
             $myusername = mysqli_real_escape_string($conn, $_POST['userID']);
             $mypassword = mysqli_real_escape_string($conn, $_POST['userPW']);
 
-            $sql = "SELECT id, username FROM pratsep_users WHERE username = '$myusername' and password = '$mypassword'";
+            $sql = "SELECT id, username FROM pratsep_users WHERE username = '$myusername' and password = SHA1('$mypassword')";
             $result = mysqli_query($conn, $sql);
             $count = mysqli_num_rows($result);
             $row = mysqli_fetch_assoc($result);
@@ -113,7 +123,7 @@ function NewUser() {
         $username = test_input(mysqli_real_escape_string($conn, $_POST['newUser']));
         $password = test_input(mysqli_real_escape_string($conn, $_POST['newPw']));
         $sql = mysqli_query($conn, "insert into pratsep_users(username, password)
-							                        values('$username','$password')")
+							                        values('$username', SHA1('$password'))")
         or die("MySQL error:" . $conn->error);
     }
     echo 'REGISTRATION COMPLETE!';
