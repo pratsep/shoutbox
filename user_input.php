@@ -17,6 +17,12 @@ echo '        <textarea id="txtArea" name="comment" form="insert_form" placehold
     </div>
     <input id="submit_button" type="submit" value="Post"/>
     </form>
+    <?php
+
+    if(!empty($_SESSION['errors'])) {
+        echo $_SESSION['errors'];
+    }
+    ?>
 </div>
 
     <div class="pages">
@@ -81,4 +87,5 @@ if ($pages>1 && $currentpage<$pages) {
 echo '</div>';
 echo '</div>';
 echo '<script>active_button("pg'.$currentpage.'")</script>';
+echo '<div class="comments">';
 ?>

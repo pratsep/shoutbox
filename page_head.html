@@ -42,7 +42,7 @@ echo '</div>';
 </div>
 
 <?php if((isset($_GET['navigate']) && $_GET['navigate'] == "posts") || (isset($_GET['page']) && $_GET['page'] == "1") || empty($_GET)): ?>
-        <script>setInterval(refresh_div,1000);</script>
+        <script>setInterval(refresh_div,10000);</script>
 <?php endif; ?>
 
 <div class="pgBody">

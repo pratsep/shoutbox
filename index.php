@@ -2,8 +2,8 @@
 session_start();
 include("functions.php");
 configDB();
+//save_last_post_id();
 include("page_head.html");
-
 
 if(!empty($_GET) && isset($_GET['navigate'])){
     $navigate = htmlspecialchars($_GET['navigate']);
@@ -13,6 +13,7 @@ else{
 }
 switch($navigate){
     case "posts":
+        //save_last_post_id();
         include("user_input.php");
         include("posts.php");
         break;
@@ -35,6 +36,7 @@ switch($navigate){
         search_user();
         break;
     default:
+        //save_last_post_id();
         include("user_input.php");
         include("posts.php");
         break;

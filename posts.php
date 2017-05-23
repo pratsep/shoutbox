@@ -14,8 +14,8 @@ if ($conn->connect_error) {
 }
 
 
+//echo '<div class="comments">';
 
-echo '<div class="comments">';
 if (isset($_GET['page']) && $_GET['page']>1) {
     $ofset = (($_GET['page'])*10) - 10;
 }
@@ -55,5 +55,7 @@ if (mysqli_num_rows($result) > 0) {
 else {
     echo "<h2>Ühtegi sõnumit pole!</h2>";
 }
-echo '</div>';
+//echo '</div>';
+
+
 ?>

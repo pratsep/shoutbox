@@ -10,6 +10,16 @@ function configDB(){
         die("Ei saanud ühendada: ".$conn->connect_error);
     }
 }
+function save_last_post_id(){
+    if(!isset($_SESSION['laspostid'])){
+        global $conn;
+        $query = "SELECT MAX(id) FROM pratsep_shoutbox";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+        //print_r($row);
+        $_SESSION['lastpostid'] = $row['MAX(id)'];
+    }
+}
 function update_pw(){
     global $conn;
     $select_query = "SELECT * FROM pratsep_users WHERE id<28";
