@@ -10,6 +10,7 @@ function configDB(){
         die("Ei saanud ühendada: ".$conn->connect_error);
     }
 }
+/*
 function save_last_post_id(){
     if(!isset($_SESSION['laspostid'])){
         global $conn;
@@ -20,6 +21,7 @@ function save_last_post_id(){
         $_SESSION['lastpostid'] = $row['MAX(id)'];
     }
 }
+
 function update_pw(){
     global $conn;
     $select_query = "SELECT * FROM pratsep_users WHERE id<28";
@@ -30,6 +32,8 @@ function update_pw(){
     }
 
 }
+*/
+
 function login(){
     require_once("log_in.php");
     if(!isset($_SESSION['login_user'])) {
@@ -68,9 +72,9 @@ function search_user(){
                     $date = new DateTime($row["time"]);
                     $newDate = $date->format('H:i:s d-m-Y');
                     echo '<div class ="comment">';
-                    echo '<h1>' . $row["username"] . '</h1>';
-                    echo '<pre>' . $row["comment"] . '</pre>';
-                    echo '<p class="dTime">' . $newDate . '</p>';
+                    echo '<h1>' . htmlspecialchars($row["username"]) . '</h1>';
+                    echo '<pre>' . htmlspecialchars($row["comment"]) . '</pre>';
+                    echo '<p class="dTime">' . htmlspecialchars($newDate) . '</p>';
                     $directory = "images/";
                     $files = glob($directory . "*");
                     foreach ($files as $key => $oneFile) {
@@ -141,7 +145,8 @@ function NewUser() {
 function SignUp() {
     global $conn;
     if(isset($_POST['newUser']) && isset($_POST['newPw'])) {
-        $sql = mysqli_query($conn, "SELECT * FROM pratsep_users WHERE username = '$_POST[newUser]'");
+        $isUser = test_input(mysqli_real_escape_string($conn, $_POST['newUser']));
+        $sql = mysqli_query($conn, "SELECT * FROM pratsep_users WHERE username = '$isUser'");
         $count = mysqli_num_rows($sql);
         if($count < 1 ) {
             newuser();

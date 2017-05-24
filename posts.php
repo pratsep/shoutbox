@@ -29,9 +29,9 @@ if (mysqli_num_rows($result) > 0) {
         $date = new DateTime($row["time"]);
         $newDate = $date->format('H:i:s d-m-Y');
         echo '<div class ="comment">';
-        echo '<h1>'.$row["username"].'</h1>';
-        echo '<pre>'.$row["comment"].'</pre>';
-        echo '<p class="dTime">'.$newDate.'</p>';
+        echo '<h1>'.htmlspecialchars($row["username"]).'</h1>';
+        echo '<pre>'.htmlspecialchars($row["comment"]).'</pre>';
+        echo '<p class="dTime">'.htmlspecialchars($newDate).'</p>';
         $directory = "images/";
         $files = glob($directory . "*");
         foreach ($files as $key => $oneFile) {
@@ -45,7 +45,7 @@ if (mysqli_num_rows($result) > 0) {
         if (isset($_SESSION['login_user'])){
             if (strcasecmp($row['username'], $_SESSION['login_user']) == 0 || $_SESSION['login_user'] == "admin") {
                 echo "<form action='send_data.php' method='post' name='deleteCmt'>";
-                echo "<input type='hidden' name='delete' value=".$row['id']." />";
+                echo "<input type='hidden' name='delete' value=".htmlspecialchars($row['id'])." />";
                 echo "<input type='submit' value='Delete post'/></form>";
             }
         }

@@ -20,7 +20,7 @@ echo '        <textarea id="txtArea" name="comment" form="insert_form" placehold
     <?php
 
     if(!empty($_SESSION['errors'])) {
-        echo $_SESSION['errors'];
+        echo htmlspecialchars($_SESSION['errors']);
     }
     ?>
 </div>
@@ -41,12 +41,12 @@ if (!isset($_GET['page'])) {
     $currentpage=1;
 }
 else {
-    $currentpage=$_GET['page'];
+    $currentpage=htmlspecialchars($_GET['page']);
 }
 //previous
 echo '<div class="prvnxtButtons">';
 if ($pages>1 && isset($_GET['page']) && $currentpage>1) {
-    $pagenr1 = $_GET['page'] - 1;
+    $pagenr1 = htmlspecialchars($_GET['page']) - 1;
     $addr1 = "window.location.href='?page=$pagenr1'";
     echo '<button id="previousButton" onclick="'.$addr1.'">Previous page</button>';
 }

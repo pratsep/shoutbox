@@ -15,7 +15,7 @@
 <?php
 echo '<div class="logInOut">';
 if (isset($_SESSION['login_user'])) {
-    echo "Logged in as: " . $_SESSION["login_user"];
+    echo "Logged in as: " . htmlspecialchars($_SESSION["login_user"]);
 }
 else{
     echo "Not logged in";

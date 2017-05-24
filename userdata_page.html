@@ -1,9 +1,9 @@
 <div class="user_data_div">
-    <p>There are <strong><?php echo $count ?></strong> total registered users:</p>
+    <p>There are <strong><?php echo htmlspecialchars($count) ?></strong> total registered users:</p>
         <?php $i = 1; ?>
         <?php foreach($posts as $user=>$postnr): ?>
-    <?php echo $i .'. '; ?>User: <strong><?php echo $user; ?></strong> with <strong><?php echo $postnr; ?></strong> posts.<br>
+    <?php echo $i .'. '; ?>User: <strong><?php echo htmlspecialchars($user); ?></strong> with <strong><?php echo htmlspecialchars($postnr); ?></strong> posts.<br>
         <?php $i++; ?>
         <?php endforeach; ?>
-    <p>Last registered user is <strong><?php echo $lastuser['username'] ?></strong></p>
+    <p>Last registered user is <strong><?php echo htmlspecialchars($lastuser['username']) ?></strong></p>
 </div>
