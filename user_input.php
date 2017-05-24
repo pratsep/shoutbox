@@ -7,9 +7,9 @@ else {
     echo '    <form method="post" action="send_data.php" enctype="multipart/form-data" id="insert_form" onsubmit="return checkForm(this);">';
 }
 if (!isset($_SESSION['login_user'])){
-    echo '<input type="text" name="user" placeholder="Sisesta kasutaja" required/>';
+    echo '<input type="text" name="user" placeholder="Insert username" required/>';
 }
-echo '        <textarea id="txtArea" name="comment" form="insert_form" placeholder="Sisesta tekst" onkeydown="pressed(event)" required></textarea>';
+echo '        <textarea id="txtArea" name="comment" form="insert_form" placeholder="Shift+Enter to change line" onkeydown="pressed(event)" required></textarea>';
 ?>
     <div class="sisestus">
         Lisa pilt<br>

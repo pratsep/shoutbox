@@ -38,9 +38,9 @@ if (empty($_SESSION['errors'])) {
         $count = mysqli_num_rows($sql1);
 
         if ($count < 1) {
-            $username = test_input(mysqli_real_escape_string($conn, $_POST['user']));
+            $username = mysqli_real_escape_string($conn, $_POST['user']);
             //$username = test_input($_POST['user']);
-            $comment = test_input(mysqli_real_escape_string($conn, $_POST['comment']));
+            $comment = mysqli_real_escape_string($conn, $_POST['comment']);
             //$comment = test_input($_POST['comment']);
             mysqli_query($conn, "insert into pratsep_shoutbox(username, comment, time)
                                    values('$username','$comment', sysdate())")
@@ -52,9 +52,9 @@ if (empty($_SESSION['errors'])) {
         }
     }
     if (isset($_SESSION['login_user']) && isset($_POST['comment'])) {
-        $username = test_input(mysqli_real_escape_string($conn, $_SESSION['login_user']));
+        $username = mysqli_real_escape_string($conn, $_SESSION['login_user']);
         //$username = test_input($_SESSION['login_user']);
-        $comment = test_input(mysqli_real_escape_string($conn, $_POST['comment']));
+        $comment = mysqli_real_escape_string($conn, $_POST['comment']);
         mysqli_query($conn, "insert into pratsep_shoutbox(username, comment, time)
                                        values('$username','$comment', sysdate())")
         or die("MySQL error:" . $conn->error);
