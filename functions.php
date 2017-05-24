@@ -78,7 +78,7 @@ function search_user(){
                         $array2 = explode(".", $array1[1]);
                         $id = $array2[0];
                         if ($id == $row['id']) {
-                            echo '<img src="' . $files[$key] . '" width="200" height="200" class="pic"/>';
+                            echo '<img src="' . $files[$key] . '" width="200" height="200" class="pic" alt="small picture"/>';
                         }
                     }
                     echo '</div>';

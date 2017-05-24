@@ -15,6 +15,9 @@ function imgClick(){
     $('.pic').on('click', function () {
         var tmpImg = new Image();
         var src = $(this).attr('src');
+
+
+
         tmpImg.src=src;
         var orgWidth = tmpImg.width;
         var orgHeight = tmpImg.height;
@@ -50,10 +53,14 @@ function imgClick(){
         $('.bigPic').css({"display": "none", "opacity": "0"});
     });
 }
-window.onload = function() {
+document.ready = function() {
     imgClick();
     focusTextArea();
 }
+//window.onload = function() {
+//    imgClick();
+//    focusTextArea();
+//}
 var re = /^\w+$/;
 function checkFormNoUser(form) {
     re = /^\s*$/;

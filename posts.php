@@ -39,7 +39,7 @@ if (mysqli_num_rows($result) > 0) {
             $array2 = explode(".",$array1[1]);
             $id = $array2[0];
             if ($id == $row['id']){
-                echo '<img src="'.$files[$key].'" width="200" height="200" class="pic"/>';
+                echo '<img src="'.$files[$key].'" width="200" height="200" class="pic" alt="small picture"/>';
             }
         }
         if (isset($_SESSION['login_user'])){
@@ -55,7 +55,7 @@ if (mysqli_num_rows($result) > 0) {
 else {
     echo "<h2>Ühtegi sõnumit pole!</h2>";
 }
-//echo '</div>';
+echo '</div>';
 
 
 ?>
