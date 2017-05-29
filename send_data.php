@@ -62,8 +62,14 @@ if (empty($_SESSION['errors'])) {
         add_picture($last_id);
     }
     if (isset($_POST['delete'])) {
-        $sql = "DELETE FROM pratsep_shoutbox WHERE id='" . mysqli_real_escape_string($conn, $_POST['delete']) . "'";
-        mysqli_query($conn, $sql);
+        $confirm = "SELECT * FROM pratsep_shoutbox WHERE id = '" . mysqli_real_escape_string($conn, $_POST['delete']) . "'";
+        $result = mysqli_query($conn, $confirm);
+        $check = mysqli_fetch_assoc($result);
+        if(strcasecmp($check['username'], $_SESSION['login_user']) == 0 || $_SESSION['login_user'] == "admin"){
+            $sql = "DELETE FROM pratsep_shoutbox WHERE id='" . mysqli_real_escape_string($conn, $_POST['delete']) . "'";
+            mysqli_query($conn, $sql);
+        }
+
     }
     mysqli_close($conn);
 }
