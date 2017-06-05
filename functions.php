@@ -35,6 +35,8 @@ function update_pw(){
 */
 
 function login(){
+    //https://www.tutorialspoint.com/php/php_mysql_login.htm
+    //näite järgi.
     require_once("log_in.php");
     if(!isset($_SESSION['login_user'])) {
         global $conn;
@@ -131,6 +133,10 @@ function test_input($data) {
     $data = htmlspecialchars($data);
     return $data;
 }
+
+//Tegin registreerimise osa mingi näite järgi aga kuna ma väga palju olen muutnud siis
+//enam tõesti üles ei leidnud millele viidata. Võimalik, et oli selle järgi
+//http://mrbool.com/how-to-create-a-sign-up-form-registration-with-php-and-mysql/28675
 function NewUser() {
     global $conn;
     if(isset($_POST['newUser']) && isset($_POST['newPw']) ) {

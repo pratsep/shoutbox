@@ -1,4 +1,7 @@
+
 function refresh_div() {
+    //Viide:
+    //https://stackoverflow.com/questions/24451545/how-can-refresh-mysql-query-in-every-second-using-ajax-or-php
     jQuery.ajax({
         url:'posts.php',
         type:'POST',
